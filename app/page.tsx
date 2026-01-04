@@ -9,7 +9,7 @@ import Script from "next/script";
 export default function Home() {
   return (
     <>
-      {/* GOOGLE ANALYTICS - IMPLEMENTAÇÃO OTIMIZADA STR GENETICS */}
+      {/* GOOGLE ANALYTICS (GTAG.JS) - URL CORRETA STR SOFTWARE */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=AW-17852258760"
         strategy="afterInteractive"
@@ -19,15 +19,14 @@ export default function Home() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'AW-17852258760', {
-            page_path: window.location.pathname,
-          });
+
+          gtag('config', 'AW-17852258760');
         `}
       </Script>
 
       <main className="min-h-screen bg-[#020617] text-white selection:bg-blue-500/30">
         
-        {/* BOTÃO ADMIN */}
+        {/* BOTÃO ADMIN (SEM MODAL, SEM CLIENT) */}
         <div className="fixed top-6 right-6 z-30">
           <Link
             href="/admin"
@@ -73,7 +72,7 @@ export default function Home() {
               <div className="flex gap-4 pt-4">
                 <div className="h-12 w-[1px] bg-gradient-to-b from-blue-500 to-transparent"></div>
                 <p className="text-sm text-slate-500 font-mono italic">
-                  Stack: Next.js 16, TypeScript, <br /> Prisma & PostgreSQL
+                  Stack: Next.js 15, TypeScript, <br /> Prisma & PostgreSQL
                 </p>
               </div>
             </div>
