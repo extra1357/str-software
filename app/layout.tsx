@@ -1,33 +1,113 @@
-// app/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Fonte moderna e profissional
+import { Sora } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700", "800"],
+  variable: "--font-sora",
+});
+
+const baseUrl = "https://strsoftware.com.br";
 
 export const metadata: Metadata = {
-  title: "STR SOFTWARE | Desenvolvimento de Sistemas Web de Alta Performance",
-  description: "Especialistas em Next.js, TypeScript e Node.js. Criamos soluções robustas e escaláveis para o seu negócio.",
-  keywords: ["Desenvolvimento de sites", "Sistemas Web", "Next.js", "Software House", "STR Software"],
-  authors: [{ name: "STR Software" }],
-  openGraph: {
-    title: "STR SOFTWARE | Sistemas Web Premium",
-    description: "Transformamos ideias em software de alta tecnologia.",
-    type: "website",
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: "STR Software | Desenvolvimento de Software Sob Medida em São Paulo",
+    template: "%s | STR Software",
   },
+  description:
+    "Empresa de desenvolvimento de software personalizado em São Paulo. Sistemas web, marketplaces, ERPs, agentes de IA e SaaS para empresas do interior e capital paulista.",
+  keywords: [
+    "desenvolvimento de software São Paulo",
+    "sistema web sob medida",
+    "software house SP",
+    "desenvolvimento Next.js",
+    "criação de marketplace",
+    "sistema ERP personalizado",
+    "agentes de inteligência artificial",
+    "SaaS desenvolvimento",
+    "software Sorocaba",
+    "software interior SP",
+    "STR Software",
+  ],
+  authors: [{ name: "STR Software", url: baseUrl }],
+  creator: "STR Software",
+  publisher: "STR Software",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: baseUrl,
+    siteName: "STR Software",
+    title: "STR Software | Desenvolvimento de Software Sob Medida em São Paulo",
+    description:
+      "Sistemas web, marketplaces, ERPs e agentes de IA para empresas de São Paulo, interior e todo o Brasil.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "STR Software" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "STR Software | Software Sob Medida em SP",
+    description: "Sistemas web, marketplaces, ERPs e IA para empresas paulistas.",
+    images: ["/og-image.png"],
+  },
+  alternates: { canonical: baseUrl },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
+      name: "STR Software",
+      url: baseUrl,
+      description: "Empresa especializada em desenvolvimento de software sob medida, sistemas web, marketplaces e inteligência artificial para empresas em São Paulo e todo o Brasil.",
+      address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressRegion: "SP", addressCountry: "BR" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      url: baseUrl,
+      name: "STR Software",
+      publisher: { "@id": `${baseUrl}/#organization` },
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": `${baseUrl}/#localbusiness`,
+      name: "STR Software",
+      url: baseUrl,
+      image: `${baseUrl}/og-image.png`,
+      description: "Desenvolvimento de software personalizado em São Paulo. Sistemas web, marketplaces, ERPs, SaaS e agentes de IA.",
+      address: { "@type": "PostalAddress", addressLocality: "São Paulo", addressRegion: "SP", addressCountry: "BR" },
+      geo: { "@type": "GeoCoordinates", latitude: -23.5505, longitude: -46.6333 },
+      areaServed: ["São Paulo Capital", "Grande São Paulo", "Interior de São Paulo", "Brasil"],
+      serviceType: ["Desenvolvimento de Software", "Marketplace", "ERP", "Agentes de IA", "SaaS"],
+      priceRange: "$$",
+    },
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-PT" className="scroll-smooth">
-      <body className={`${inter.className} bg-premium-gradient antialiased`}>
-        {/* Aqui podes incluir uma Navbar futuramente */}
+    <html lang="pt-BR" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className={`${sora.variable} font-sans bg-[#080808] antialiased`}>
         {children}
-        {/* Aqui podes incluir um Footer futuramente */}
       </body>
     </html>
   );
